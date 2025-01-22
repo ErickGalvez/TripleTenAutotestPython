@@ -1,16 +1,18 @@
+from http.client import responses
 from tkinter.font import names
 
 import requests
 import data
 import configuration
+import sender_stand_request
+from sender_stand_request import post_kit
 
 kit_body = data.kit_body.copy()
 user_body = data.user_body.copy()
 
 def create_user(body):
-    request = requests.post(configuration.URL_SERVICE + configuration.CREATE_USER_PATH,"",body)
-    print(request.json())
-    return request.json()
+    response = sender_stand_request.post_user(body)
+    return response.json()
 
 def get_token(request):
     body_token = 'Bearer ' + request.get("authToken")
@@ -22,11 +24,11 @@ def get_token(request):
 
     return auth_token
 
-def create_kit(kit_name):
-    print("creating kit with kit name:" + kit_name["name"])
+def create_kit(kit_body):
+    print("creating kit with kit name:" + kit_body["name"])
     token = get_token(create_user(user_body))
     print("token is "+ token["Authorization"])
-    response_kit = requests.post(configuration.URL_SERVICE + configuration.KITS_PATH,json = kit_name,headers = token)
+    response_kit = post_kit(kit_body, token)
     return response_kit
 
 def change_kit_body(kit_name):
@@ -42,12 +44,12 @@ def kit(kit_string):
 
 def create_empty_kit(): #special function to insert empty json as parameter
     token = get_token(create_user(user_body))
-    response_kit = requests.post(configuration.URL_SERVICE + configuration.KITS_PATH,json = {},headers = token)
+    response_kit = post_kit({},token)
     return response_kit
 
 def create_number_kit(): #special function to insert int number in "name"
     token = get_token(create_user(user_body))
-    response_kit = requests.post(configuration.URL_SERVICE + configuration.KITS_PATH, json={"name" : 123}, headers=token)
+    response_kit = post_kit({"name" : 123},token)
     return response_kit
 
 def positive_assert(name):
@@ -67,6 +69,12 @@ def test_special_character_kit_name():
     positive_assert("\"№%@\",")
 def test_space_kit():
     positive_assert("A Aaa ")
+def test_no_space_kit():
+    positive_assert("AAaa")
+def test_two_five_five_letter_kit_name():
+    positive_assert(data.name_two_five_five)
+def test_two_five_six_letter_kit_name():
+    negative_assert(data.name_two_five_six)
 def test_number_kit_name():
     positive_assert("123")
 def test_no_name():
