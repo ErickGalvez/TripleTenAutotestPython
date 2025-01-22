@@ -8,7 +8,7 @@ user_body = data.user_body.copy()
 
 
 def post_user(user_request_body):
-    user_response = requests.post(configuration.URL_SERVICE + configuration.CREATE_USER_PATH,json = user_request_body)
+    user_response = requests.post(configuration.URL_SERVICE + configuration.CREATE_USER_PATH,json = user_request_body,headers=data.headers)
     return user_response
 
 def post_kit(kit_request_body, token):

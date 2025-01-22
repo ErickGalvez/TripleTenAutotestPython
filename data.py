@@ -10,10 +10,6 @@ user_body = {
     "address": "123 Elm Street, Hilltop"
 }
 
-product_ids = {
-    "ids": [1, 2, 3]
-}
-
 kit_body = {"name": "123"}
 
 name_two_five_five = "ThequickbrownfoxjumpsoverthelazydogdemonstratingagilityandwitMeanwhilethesunsetspaintingtheskyinhuesoforangepinkandpurpleAgentlebreezecarriesthescentofbloomingflowersasstarsbegintotwinklesignalingthenightsembraceforestswhisperwithmysteryaaaaaaaaaaaaaaaaaa"
