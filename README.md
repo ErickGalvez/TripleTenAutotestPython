@@ -1,6 +1,6 @@
-# Proyecto Urban Grocers 
-# Erick Antonio Gàlvez Arredondo
+# Urban Grocers: A simulated delivery app that mimics real food delivery apps, front-end and back-end 
 
+# Erick Antonio Gàlvez Arredondo
 Cohort 20 Quality Assurance Engineering bootcamp TripleTen
 
 Libraries used: Pytest | Requests
